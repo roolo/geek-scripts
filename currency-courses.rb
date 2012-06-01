@@ -1,7 +1,7 @@
 #!/Users/mailo/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -Ku
 # encoding: UTF-8
 # http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt
-# require "open-uri"
+require "open-uri"
 require 'csv'
 require 'optparse'
 
@@ -38,7 +38,8 @@ end
 opt_parse.parse!
 
 #uri = URI.parse("http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt")
-courses_separated = CSV.read('/Users/mailo/kurzy', col_sep: '|' )
+courses_file_content = open('http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt') { |f| f.read }
+courses_separated = CSV.parse(courses_file_content, col_sep: '|' )
 header = courses_separated[1]
 
 
